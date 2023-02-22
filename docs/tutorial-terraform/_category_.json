@@ -1,0 +1,8 @@
+{
+  "label": "Tutorial - Terraform",
+  "position": 4,
+  "link": {
+    "type": "generated-index",
+    "description": "Build, change, and destroy AWS infrastructure using Terraform. Step-by-step, command-line tutorials will walk you through the Terraform basics for the first time."
+  }
+}
