@@ -13,40 +13,45 @@ Terraform is HashiCorp's infrastructure as code tool. It lets you define resourc
 - Terraform's state allows you to track resource changes throughout your deployments.
 - You can commit your configurations to version control to safely collaborate on infrastructure.
 
-Add **Markdown or React** files to `src/pages` to create a **standalone page**:
+# Standardize your deployment workflow
+![Alt text](https://learn.hashicorp.com/img/terraform/terraform-iac.png)
+# Build Infrastructure
+## Prerequisites
+To follow this tutorial you will need:
+* The [Terraform CLI](https://learn.hashicorp.com/tutorials/terraform/install-cli) (0.14.9+) installed.
+* The [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html) installed.
+* [An AWS account](https://aws.amazon.com/free/).
+* Your AWS credentials. You can [create a new Access Key on this page](https://console.aws.amazon.com/iam/home?#/security_credentials).
 
-- `src/pages/index.js` → `localhost:3000/`
-- `src/pages/foo.md` → `localhost:3000/foo`
-- `src/pages/foo/bar.js` → `localhost:3000/foo/bar`
+## Usage:
+* Specify the AWS region to create resources into, using region variable.
 
-## Create your first React Page
+* Specify the aws-cli profile for the account to create resources in, using profile variable.
+    * The default location to view your aws-cli profiles is $HOME/.aws/credentials on Linux and macOS and %USERPROFILE%\.aws\credentials on Windows.
+    * There are a number of other options for authenticating with the AWS Provider. These can be found here: https://registry.terraform.io/providers/hashicorp/aws/latest/docs. To implement other strategies, replace the profile property of the aws provider as appropriate.
 
-Create a file at `src/pages/my-react-page.js`:
-
-```jsx title="src/pages/my-react-page.js"
-import React from 'react';
-import Layout from '@theme/Layout';
-
-export default function MyReactPage() {
-  return (
-    <Layout>
-      <h1>My React page</h1>
-      <p>This is a React page</p>
-    </Layout>
-  );
-}
+### Initialize the directory
 ```
-
-A new page is now available at [http://localhost:3000/my-react-page](http://localhost:3000/my-react-page).
-
-## Create your first Markdown Page
-
-Create a file at `src/pages/my-markdown-page.md`:
-
-```mdx title="src/pages/my-markdown-page.md"
-# My Markdown page
-
-This is a Markdown page
+$ terraform init
 ```
-
-A new page is now available at [http://localhost:3000/my-markdown-page](http://localhost:3000/my-markdown-page).
+### Format and validate the configuration
+```
+$ terraform validate
+```
+### Create execution plan
+```
+$ terraform plan
+```
+### Create infrastructure
+```
+$ terraform apply
+```
+### Inspect state
+```
+$ terraform show
+```
+### Terraform Target (run terraform only for a specific resource)
+```
+$ terraform state list
+$ terraform apply -target aws_ecs_service.admin
+```
